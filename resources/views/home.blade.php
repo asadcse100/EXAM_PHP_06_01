@@ -30,11 +30,11 @@
                                 <th scope="row">{{$key+1}}</th>
                                 <td>{{$info->office_name}}</td>
                                 <td>{{$info->office_address}}</td>
-                                <td>190</td>
+                                <td>{{count($info->colleagues)}}</td>
                                 <td>
                                     <button class="btn btn-primary btn-sm">View</button>
                                     <button class="btn btn-info btn-sm">Edit</button>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                    <button class="btn btn-danger btn-sm delete">Delete</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -49,7 +49,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Office Collegue') }}</div>
                 <div class="card-body">
-                <form id="form" action="{{Route('store')}}" method="post" enctype="multipart/form-data">
+                <form id="myForm" action="{{Route('store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                         <h2>Office Information</h2>
                         <div class="row">
@@ -186,6 +186,7 @@
 
         $(document).on('click', '.delete', function(){
         var id = $(this).attr("id");
+        console.log(id);
         if(confirm("Are you sure you want to delete this records?"))
         {
         $.ajax({
@@ -201,6 +202,29 @@
         }
         });
 
+
+         $('#myForm').submit(function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    // Handle the successful response from the server
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
+                }
+            });
+        });
 
     });
 
