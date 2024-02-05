@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateColleaguesTable extends Migration
+class CreateOfficesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateColleaguesTable extends Migration
      */
     public function up()
     {
-        Schema::create('colleagues', function (Blueprint $table) {
+        Schema::create('offices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('office_id');
-            $table->string('colleague_name');
-            $table->string('colleague_mobile');
-            $table->string('colleague_address');
+            $table->string('office_name');
+            $table->string('office_address');
+            $table->string('office_phone');
+            $table->string('application_letter');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateColleaguesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colleagues');
+        Schema::dropIfExists('offices');
     }
 }

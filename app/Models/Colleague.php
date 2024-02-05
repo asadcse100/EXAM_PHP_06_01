@@ -9,7 +9,7 @@ class Colleague extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['colleague_name', 'colleague_mobile', 'colleague_address'];
+    protected $fillable = ['office_id','colleague_name', 'colleague_mobile', 'colleague_address'];
 
     public function office()
     {
